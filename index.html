@@ -196,8 +196,8 @@
                         <tbody>
                             <tr>
                                 <td class="font-medium">인원 수</td>
-                                <td><input type="number" name="mar-new-male" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                <td><input type="number" name="mar-new-female" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" id="mar-new-male" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" id="mar-new-female" name="mar-new-female" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -227,11 +227,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="number" name="target-male-general" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                    <td><input type="number" name="target-male-focused" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                    <td><input type="number" name="target-male-general-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                    <td><input type="number" name="target-male-focused-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                    <td><input type="number" name="target-male-specialized-only" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-male-general" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-male-focused" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-male-general-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-male-focused-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-male-specialized-only" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -255,11 +255,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="number" name="target-female-general" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                    <td><input type="number" name="target-female-focused" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                    <td><input type="number" name="target-female-general-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                    <td><input type="number" name="target-female-focused-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                    <td><input type="number" name="target-female-specialized-only" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-female-general" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-female-focused" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-female-general-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-female-focused-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" id="target-female-specialized-only" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -285,9 +285,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="number" name="mar-end-male-death" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="25"></td>
-                                    <td><input type="number" name="mar-end-male-refusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="31"></td>
-                                    <td><input type="number" name="mar-end-male-other" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="280"></td>
+                                    <td><input type="number" id="endMaleDeath" name="endMaleDeath" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="25"></td>
+                                    <td><input type="number" id="endMaleRefusal" name="endMaleRefusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="31"></td>
+                                    <td><input type="number" id="endMaleOther" name="endMaleOther" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="280"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -306,9 +306,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="number" name="mar-end-female-death" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="98"></td>
-                                    <td><input type="number" name="mar-end-female-refusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="65"></td>
-                                    <td><input type="number" name="mar-end-female-other" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="152"></td>
+                                    <td><input type="number" id="endFemaleDeath" name="endFemaleDeath" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="98"></td>
+                                    <td><input type="number" id="endFemaleRefusal" name="endFemaleRefusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="65"></td>
+                                    <td><input type="number" id="endFemaleOther" name="endFemaleOther" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="152"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -324,77 +324,25 @@
     </div>
     
     <script>
-        document.getElementById('elderly-care-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        // 안전하게 값을 가져오는 함수 정의
+        function safeGetValue(elementId) {
+            // 먼저 ID로 요소 찾기
+            let element = document.getElementById(elementId);
             
-            // 폼 데이터 수집
-            const formData = {
-                region: document.getElementById('region-select').value,
-                institution: document.getElementById('institution-select').value,
-                institutionCode: document.getElementById('institution-code').value,
-                personnel: {
-                    socialWorkerMale: document.querySelector('input[name="social-worker-male"]').value || "0",
-                    socialWorkerFemale: document.querySelector('input[name="social-worker-female"]').value || "0",
-                    caregiverMale: document.querySelector('input[name="caregiver-male"]').value || "0",
-                    caregiverFemale: document.querySelector('input[name="caregiver-female"]').value || "0"
-                },
-                newUsers: {
-                    male: document.querySelector('input[name="mar-new-male"]').value || "0",
-                    female: document.querySelector('input[name="mar-new-female"]').value || "0"
-                },
-                targetMale: {
-                    general: document.querySelector('input[name="target-male-general"]').value || "0",
-                    focused: document.querySelector('input[name="target-male-focused"]').value || "0",
-                    generalOverlap: document.querySelector('input[name="target-male-general-overlap"]').value || "0",
-                    focusedOverlap: document.querySelector('input[name="target-male-focused-overlap"]').value || "0",
-                    specializedOnly: document.querySelector('input[name="target-male-specialized-only"]').value || "0"
-                },
-                targetFemale: {
-                    general: document.querySelector('input[name="target-female-general"]').value || "0",
-                    focused: document.querySelector('input[name="target-female-focused"]').value || "0",
-                    generalOverlap: document.querySelector('input[name="target-female-general-overlap"]').value || "0",
-                    focusedOverlap: document.querySelector('input[name="target-female-focused-overlap"]').value || "0",
-                    specializedOnly: document.querySelector('input[name="target-female-specialized-only"]').value || "0"
-                },
-                endMale: {
-                    death: document.querySelector('input[name="mar-end-male-death"]').value || "0",
-                    refusal: document.querySelector('input[name="mar-end-male-refusal"]').value || "0",
-                    other: document.querySelector('input[name="mar-end-male-other"]').value || "0"
-                },
-                endFemale: {
-                    death: document.querySelector('input[name="mar-end-female-death"]').value || "0",
-                    refusal: document.querySelector('input[name="mar-end-female-refusal"]').value || "0",
-                    other: document.querySelector('input[name="mar-end-female-other"]').value || "0"
-                }
-            };
-
-            // 즉시 성공 메시지 표시
-            alert('설문이 성공적으로 제출되었습니다. 감사합니다.');
-            
-            // 폼 초기화
-            document.querySelectorAll('input[type="number"]').forEach(input => {
-                input.value = "";
-            });
-            
-            document.getElementById('region-select').value = "";
-            document.getElementById('institution-select').value = "";
-            document.getElementById('institution-code').value = "";
-            document.getElementById('institution-select').disabled = true;
-
-            try {
-                const response = await fetch('https://script.google.com/macros/s/AKfycbyAvzc2kzxi7PJpM-Q9alz1KEu_F-9RUg1CQ1MfpJFrPIkN3GaexTlEJHVrIXdivI3xWQ/exec', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify(formData),
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8',
-                    }
-                });
-                
-            } catch (error) {
-                console.error('Error:', error);
+            // ID로 찾지 못한 경우 name 속성으로 찾기 시도
+            if (!element) {
+                element = document.querySelector(`input[name="${elementId}"]`);
             }
-        });
+            
+            // 요소를 찾았으면 값 반환, 아니면 빈 문자열 반환
+            if (element) {
+                console.log(`${elementId} 요소 값:`, element.value);
+                return element.value;
+            } else {
+                console.log(`요소를 찾을 수 없음: ${elementId}`);
+                return '0'; // 기본값으로 0 반환
+            }
+        }
         
         // 모든 숫자 입력 필드에 대한 입력 검증
         document.addEventListener('DOMContentLoaded', function() {
@@ -571,147 +519,171 @@
                 institutionCodeInput.value = selectedOption.dataset.code || '';
             });
         });
-    // 폼 제출 시 구글 Apps Script Web App으로 데이터 전송
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('elderly-care-form');
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            console.log('폼 제출 시작 - ' + new Date().toISOString());
-            
-            // 필수 필드 검증 - 전역 변수로 선언하지 않고 사용
-            let regionSelect = document.getElementById('region-select');
-            let institutionSelect = document.getElementById('institution-select');
-            
-            // 시군 검증
-            if (!regionSelect || !regionSelect.value) {
-                alert('시군을 선택해주세요.');
-                if (regionSelect) regionSelect.focus();
-                return;
-            }
-            
-            // 기관명 검증
-            if (!institutionSelect || !institutionSelect.value) {
-                alert('기관명을 선택해주세요.');
-                if (institutionSelect) institutionSelect.focus();
-                return;
-            }
-            
-            // Apps Script Web App URL (최신 URL)
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbys6q2XCv6KYVJskSOkTNzX7PwiKzldLygqeknXXlpK1qSfQ4dPVuwhWSgBfVRdBC1k/exec';
+        
+        // 폼 제출 시 구글 Apps Script Web App으로 데이터 전송
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('elderly-care-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                console.log('폼 제출 시작 - ' + new Date().toISOString());
+                
+                // 필수 필드 검증
+                let regionSelect = document.getElementById('region-select');
+                let institutionSelect = document.getElementById('institution-select');
+                
+                // 시군 검증
+                if (!regionSelect || !regionSelect.value) {
+                    alert('시군을 선택해주세요.');
+                    if (regionSelect) regionSelect.focus();
+                    return;
+                }
+                
+                // 기관명 검증
+                if (!institutionSelect || !institutionSelect.value) {
+                    alert('기관명을 선택해주세요.');
+                    if (institutionSelect) institutionSelect.focus();
+                    return;
+                }
+                
+                // Apps Script Web App URL (최신 URL)
+                const scriptUrl = 'https://script.google.com/macros/s/AKfycbx277YpsYi9lOPcRg7Xk7z1m2wgGf-o0mYeAK3BR3LDMpNz9ffB68vKCJwYY3bF5_62/exec';
 
-            // 가장 기본적인 방법으로 시도 - 폼 제출 방식으로 변경
-            // 월드 생성
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            // 폼 생성
-            const tempForm = document.createElement('form');
-            tempForm.setAttribute('method', 'post');
-            tempForm.setAttribute('action', scriptUrl);
-            tempForm.setAttribute('target', 'iframe-submission');
-            iframe.setAttribute('name', 'iframe-submission');
-            
-            // 입력 필드 추가
-            const addField = (name, value) => {
-                const input = document.createElement('input');
-                input.setAttribute('type', 'hidden');
-                input.setAttribute('name', name);
+                // iframe 생성
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
                 
-                // 값이 없으면 빈 문자열로 설정 (실제 값이 없음을 구분하기 위해)
-                if (value === undefined || value === null || value === '') {
-                    input.setAttribute('value', '');
-                } else {
-                    input.setAttribute('value', value.toString());
-                }
+                // 폼 생성
+                const tempForm = document.createElement('form');
+                tempForm.setAttribute('method', 'post');
+                tempForm.setAttribute('action', scriptUrl);
+                tempForm.setAttribute('target', 'iframe-submission');
+                iframe.setAttribute('name', 'iframe-submission');
                 
-                tempForm.appendChild(input);
-            };
-            
-            // 기본 데이터 추가 - 이미 위에서 선언한 변수 재사용
-            const institutionCodeInput = document.getElementById('institution-code');
-            
-            // 시군, 기관명, 기관코드 값 확인 및 디버깅
-            // 이미 위에서 검증했으니 반드시 값이 있음
-            const regionValue = regionSelect.value;
-            const institutionValue = institutionSelect.value;
-            const institutionCodeValue = institutionCodeInput ? institutionCodeInput.value : '';
-            
-            console.log('시군 요소:', regionSelect, '시군 값:', regionValue);
-            console.log('기관명 요소:', institutionSelect, '기관명 값:', institutionValue);
-            console.log('기관코드 요소:', institutionCodeInput, '기관코드 값:', institutionCodeValue);
-            
-            // 값을 직접 추출하여 전송 - 리터럴 문자열로 전달하여 정확히 전송되도록 함
-            addField('region', '' + regionValue);
-            addField('institution', '' + institutionValue);
-            addField('institutionCode', '' + institutionCodeValue);
-            
-            // 안전한 값 가져오기 함수 (개선버전 - 기본값 0 추가)
-            const safeGetValue = (id) => {
-                const element = document.getElementById(id);
-                if (!element) {
-                    console.log('요소를 찾을 수 없음:', id);
-                    return '0'; // 기본값으로 0 반환
+                // 입력 필드 추가 함수 정의
+                const addField = (name, value) => {
+                    const input = document.createElement('input');
+                    input.setAttribute('type', 'hidden');
+                    input.setAttribute('name', name);
+                    
+                    // 값이 없으면 빈 문자열로 설정 (실제 값이 없음을 구분하기 위해)
+                    if (value === undefined || value === null || value === '') {
+                        input.setAttribute('value', '0');
+                    } else {
+                        input.setAttribute('value', value.toString());
+                    }
+                    
+                    tempForm.appendChild(input);
+                };
+                
+                // 기본 데이터 추가
+                const institutionCodeInput = document.getElementById('institution-code');
+                
+                // 시군, 기관명, 기관코드 값 확인 및 디버깅
+                const regionValue = regionSelect.value;
+                const institutionValue = institutionSelect.value;
+                const institutionCodeValue = institutionCodeInput ? institutionCodeInput.value : '';
+                
+                console.log('시군 요소:', regionSelect, '시군 값:', regionValue);
+                console.log('기관명 요소:', institutionSelect, '기관명 값:', institutionValue);
+                console.log('기관코드 요소:', institutionCodeInput, '기관코드 값:', institutionCodeValue);
+                
+                // 값을 직접 추출하여 전송
+                addField('region', '' + regionValue);
+                addField('institution', '' + institutionValue);
+                addField('institutionCode', '' + institutionCodeValue);
+                
+                // 인력 현황 데이터
+                addField('socialWorkerMale', safeGetValue('social-worker-male') || '0');
+                addField('socialWorkerFemale', safeGetValue('social-worker-female') || '0');
+                addField('caregiverMale', safeGetValue('caregiver-male') || '0');
+                addField('caregiverFemale', safeGetValue('caregiver-female') || '0');
+                
+                // 신규 대상자 데이터
+                addField('newUsersMale', safeGetValue('mar-new-male') || '0');
+                addField('newUsersFemale', safeGetValue('mar-new-female') || '0');
+                
+                // 대상자 현황 데이터 - 남성
+                addField('targetMaleGeneral', safeGetValue('target-male-general') || '0');
+                addField('targetMaleFocused', safeGetValue('target-male-focused') || '0');
+                addField('targetMaleGeneralOverlap', safeGetValue('target-male-general-overlap') || '0');
+                addField('targetMaleFocusedOverlap', safeGetValue('target-male-focused-overlap') || '0');
+                addField('targetMaleSpecializedOnly', safeGetValue('target-male-specialized-only') || '0');
+                
+                // 대상자 현황 데이터 - 여성
+                addField('targetFemaleGeneral', safeGetValue('target-female-general') || '0');
+                addField('targetFemaleFocused', safeGetValue('target-female-focused') || '0');
+                addField('targetFemaleGeneralOverlap', safeGetValue('target-female-general-overlap') || '0');
+                addField('targetFemaleFocusedOverlap', safeGetValue('target-female-focused-overlap') || '0');
+                addField('targetFemaleSpecializedOnly', safeGetValue('target-female-specialized-only') || '0');
+                
+                // 종결 대상자 데이터 - 남성
+                addField('endMaleDeath', safeGetValue('endMaleDeath') || '0');
+                addField('endMaleRefusal', safeGetValue('endMaleRefusal') || '0');
+                addField('endMaleOther', safeGetValue('endMaleOther') || '0');
+                
+                // 종결 대상자 데이터 - 여성
+                addField('endFemaleDeath', safeGetValue('endFemaleDeath') || '0');
+                addField('endFemaleRefusal', safeGetValue('endFemaleRefusal') || '0');
+                addField('endFemaleOther', safeGetValue('endFemaleOther') || '0');
+                
+                // 전송 데이터 확인
+                const formData = new FormData(tempForm);
+                const formDataEntries = Array.from(formData.entries());
+                console.log('전송 데이터 항목:', formDataEntries);
+                
+                // 폼에 있는 모든 필드의 이름과 값을 출력
+                const formElements = tempForm.elements;
+                for (let i = 0; i < formElements.length; i++) {
+                    if (formElements[i].name) {
+                        console.log(`폼 필드: ${formElements[i].name} = ${formElements[i].value}`);
+                    }
                 }
-                const value = element.value || '0';
-                console.log(id + ' 값:', value);
-                return value;
-            };
-            
-            // 인력 현황 데이터 - 기본값 0 설정 (개선된 방식)
-            const socialWorkerMaleValue = safeGetValue('social-worker-male') || '0';
-            const socialWorkerFemaleValue = safeGetValue('social-worker-female') || '0';
-            
-            console.log('전담사회복지사(남):', socialWorkerMaleValue);
-            console.log('전담사회복지사(여):', socialWorkerFemaleValue);
-            
-            addField('socialWorkerMale', socialWorkerMaleValue);
-            addField('socialWorkerFemale', socialWorkerFemaleValue);
-            addField('caregiverMale', safeGetValue('caregiver-male') || '0');
-            addField('caregiverFemale', safeGetValue('caregiver-female') || '0');
-            
-            // 신규 대상자 데이터 - 기본값 0 설정
-            addField('newUsersMale', safeGetValue('new-users-male') || '0');
-            addField('newUsersFemale', safeGetValue('new-users-female') || '0');
-            
-            // 대상자 현황 데이터 - 남성 (기본값 0 설정)
-            addField('targetMaleGeneral', safeGetValue('target-male-general') || '0');
-            addField('targetMaleFocused', safeGetValue('target-male-focused') || '0');
-            addField('targetMaleGeneralOverlap', safeGetValue('target-male-general-overlap') || '0');
-            addField('targetMaleFocusedOverlap', safeGetValue('target-male-focused-overlap') || '0');
-            addField('targetMaleSpecializedOnly', safeGetValue('target-male-specialized-only') || '0');
-            
-            // 대상자 현황 데이터 - 여성 (기본값 0 설정)
-            addField('targetFemaleGeneral', safeGetValue('target-female-general') || '0');
-            addField('targetFemaleFocused', safeGetValue('target-female-focused') || '0');
-            addField('targetFemaleGeneralOverlap', safeGetValue('target-female-general-overlap') || '0');
-            addField('targetFemaleFocusedOverlap', safeGetValue('target-female-focused-overlap') || '0');
-            addField('targetFemaleSpecializedOnly', safeGetValue('target-female-specialized-only') || '0');
-            
-            // 종결 대상자 데이터 - 남성 (기본값 0 설정)
-            addField('endMaleDeath', safeGetValue('end-male-death') || '0');
-            addField('endMaleRefusal', safeGetValue('end-male-refusal') || '0');
-            addField('endMaleOther', safeGetValue('end-male-other') || '0');
-            
-            // 종결 대상자 데이터 - 여성 (기본값 0 설정)
-            addField('endFemaleDeath', safeGetValue('end-female-death') || '0');
-            addField('endFemaleRefusal', safeGetValue('end-female-refusal') || '0');
-            addField('endFemaleOther', safeGetValue('end-female-other') || '0');
-            
-            // 전송 데이터 확인
-            const formData = new FormData(tempForm);
-            const formDataEntries = Array.from(formData.entries());
-            console.log('전송 데이터 항목:', formDataEntries);
-            
-            // 폼에 있는 모든 필드의 이름과 값을 출력
-            const formElements = tempForm.elements;
-            for (let i = 0; i < formElements.length; i++) {
-                if (formElements[i].name) {
-                    console.log(`폼 필드: ${formElements[i].name} = ${formElements[i].value}`);
-                }
-            }
-            
-            // 폼을 문서에 추가하고 제출
+
+                // 폼 제출 직전 모든 숫자 입력 필드의 값을 출력
+                document.querySelectorAll('input[type="number"]').forEach(input => {
+                    console.log(`[제출 직전] 입력값 - id: ${input.id}, name: ${input.name}, value: ${input.value}`);
+                });
+
+                // 폼을 문서에 추가하고 제출
+                document.body.appendChild(tempForm);
+                console.log('Form submitted with data:', tempForm);
+                
+                // 폼 제출
+                tempForm.submit();
+                console.log('폼 제출 완료');
+                
+                // iframe이 로드되면 성공 메시지 표시
+                iframe.onload = function() {
+                    console.log('iframe loaded - submission complete');
+                    alert('제출이 완료되었습니다!');
+                    // 숫자 입력 필드만 초기화
+                    document.querySelectorAll('input[type="number"]').forEach(input => {
+                        input.value = "";
+                    });
+                    // 임시 요소 제거
+                    setTimeout(() => {
+                        document.body.removeChild(iframe);
+                        document.body.removeChild(tempForm);
+                    }, 100);
+                };
+                
+                // 오류 처리
+                iframe.onerror = function(error) {
+                    console.error('Form submission error:', error);
+                    alert('제출 중 오류가 발생했습니다.');
+                    
+                    // 숫자 입력 필드만 초기화
+                    document.querySelectorAll('input[type="number"]').forEach(input => {
+                        input.value = "";
+                    });
+                    
+                    // 임시 요소 제거
+                    setTimeout(() => {
+                        document.body.removeChild(iframe);
+                        document.body.removeChild(tempForm);
+                    }, 100);
+                };
             document.body.appendChild(tempForm);
             console.log('Form submitted with data:', tempForm);
             
@@ -728,8 +700,10 @@
             iframe.onload = function() {
                 console.log('iframe loaded - submission complete');
                 alert('제출이 완료되었습니다!');
-                form.reset();
-                
+                // form.reset(); // 전체 폼 리셋 제거
+                document.querySelectorAll('input[type="number"]').forEach(input => {
+                    input.value = "";
+                });
                 // 임시 요소 제거
                 setTimeout(() => {
                     document.body.removeChild(iframe);
@@ -741,6 +715,11 @@
             iframe.onerror = function(error) {
                 console.error('Form submission error:', error);
                 alert('제출 중 오류가 발생했습니다.');
+                
+                // 숫자 입력 필드만 초기화
+                document.querySelectorAll('input[type="number"]').forEach(input => {
+                    input.value = "";
+                });
                 
                 // 임시 요소 제거
                 setTimeout(() => {

@@ -642,39 +642,45 @@
             addField('institution', institution);
             addField('institutionCode', institutionCode);
             
+            // 안전한 값 가져오기 함수
+            const safeGetValue = (id) => {
+                const element = document.getElementById(id);
+                return element ? element.value : '0';
+            };
+            
             // 인력 현황 데이터
-            addField('socialWorkerMale', document.getElementById('social-worker-male').value);
-            addField('socialWorkerFemale', document.getElementById('social-worker-female').value);
-            addField('caregiverMale', document.getElementById('caregiver-male').value);
-            addField('caregiverFemale', document.getElementById('caregiver-female').value);
+            addField('socialWorkerMale', safeGetValue('social-worker-male'));
+            addField('socialWorkerFemale', safeGetValue('social-worker-female'));
+            addField('caregiverMale', safeGetValue('caregiver-male'));
+            addField('caregiverFemale', safeGetValue('caregiver-female'));
             
-            // 신규 대상자 데이터
-            addField('newUsersMale', document.getElementById('new-users-male').value);
-            addField('newUsersFemale', document.getElementById('new-users-female').value);
+            // 신규 대상자 데이터 - 기본값 0 사용
+            addField('newUsersMale', '0');
+            addField('newUsersFemale', '0');
             
-            // 대상자 현황 데이터 - 남성
-            addField('targetMaleGeneral', document.getElementById('target-male-general').value);
-            addField('targetMaleFocused', document.getElementById('target-male-focused').value);
-            addField('targetMaleGeneralOverlap', document.getElementById('target-male-general-overlap').value);
-            addField('targetMaleFocusedOverlap', document.getElementById('target-male-focused-overlap').value);
-            addField('targetMaleSpecializedOnly', document.getElementById('target-male-specialized-only').value);
+            // 대상자 현황 데이터 - 남성 (기본값 0 사용)
+            addField('targetMaleGeneral', '0');
+            addField('targetMaleFocused', '0');
+            addField('targetMaleGeneralOverlap', '0');
+            addField('targetMaleFocusedOverlap', '0');
+            addField('targetMaleSpecializedOnly', '0');
             
-            // 대상자 현황 데이터 - 여성
-            addField('targetFemaleGeneral', document.getElementById('target-female-general').value);
-            addField('targetFemaleFocused', document.getElementById('target-female-focused').value);
-            addField('targetFemaleGeneralOverlap', document.getElementById('target-female-general-overlap').value);
-            addField('targetFemaleFocusedOverlap', document.getElementById('target-female-focused-overlap').value);
-            addField('targetFemaleSpecializedOnly', document.getElementById('target-female-specialized-only').value);
+            // 대상자 현황 데이터 - 여성 (기본값 0 사용)
+            addField('targetFemaleGeneral', '0');
+            addField('targetFemaleFocused', '0');
+            addField('targetFemaleGeneralOverlap', '0');
+            addField('targetFemaleFocusedOverlap', '0');
+            addField('targetFemaleSpecializedOnly', '0');
             
-            // 종결 대상자 데이터 - 남성
-            addField('endMaleDeath', document.getElementById('end-male-death').value);
-            addField('endMaleRefusal', document.getElementById('end-male-refusal').value);
-            addField('endMaleOther', document.getElementById('end-male-other').value);
+            // 종결 대상자 데이터 - 남성 (기본값 0 사용)
+            addField('endMaleDeath', '0');
+            addField('endMaleRefusal', '0');
+            addField('endMaleOther', '0');
             
-            // 종결 대상자 데이터 - 여성
-            addField('endFemaleDeath', document.getElementById('end-female-death').value);
-            addField('endFemaleRefusal', document.getElementById('end-female-refusal').value);
-            addField('endFemaleOther', document.getElementById('end-female-other').value);
+            // 종결 대상자 데이터 - 여성 (기본값 0 사용)
+            addField('endFemaleDeath', '0');
+            addField('endFemaleRefusal', '0');
+            addField('endFemaleOther', '0');
             
             // 폼을 문서에 추가하고 제출
             document.body.appendChild(tempForm);

@@ -606,51 +606,42 @@
             };
 
             // Apps Script Web App URL (실제 URL)
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbx9mwX8BYnOHBZ74EafngkdUtaYsqwqHrnTgjRudhZ-veM4NtW80Q8-Fl6-3x4p42-o/exec';
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbwWzVKmgzt3TYcrUqOHXZCqhdi8T8uiLWcLP8tcTuL1SeDBcdxlhZsAmP4gN9xoO4ok/exec';
 
-            // 직접 폼 데이터 생성 - 가장 기본적인 방법으로 시도
-            const formData = new FormData();
-            formData.append('region', region);
-            formData.append('institution', institution);
-            formData.append('institutionCode', institutionCode);
+            // 가장 기본적인 방법으로 시도 - URL 쿼리 파라미터 사용
+            let url = scriptUrl + '?';
+            url += 'region=' + encodeURIComponent(region);
+            url += '&institution=' + encodeURIComponent(institution);
+            url += '&institutionCode=' + encodeURIComponent(institutionCode);
             
             // 인력 현황 데이터
-            formData.append('socialWorkerMale', document.getElementById('social-worker-male').value || '0');
-            formData.append('socialWorkerFemale', document.getElementById('social-worker-female').value || '0');
-            formData.append('caregiverMale', document.getElementById('caregiver-male').value || '0');
-            formData.append('caregiverFemale', document.getElementById('caregiver-female').value || '0');
+            url += '&socialWorkerMale=' + encodeURIComponent(document.getElementById('social-worker-male').value || '0');
+            url += '&socialWorkerFemale=' + encodeURIComponent(document.getElementById('social-worker-female').value || '0');
+            url += '&caregiverMale=' + encodeURIComponent(document.getElementById('caregiver-male').value || '0');
+            url += '&caregiverFemale=' + encodeURIComponent(document.getElementById('caregiver-female').value || '0');
             
             // 나머지 데이터는 고정값으로 설정
-            formData.append('newUsersMale', '0');
-            formData.append('newUsersFemale', '0');
+            url += '&newUsersMale=0';
+            url += '&newUsersFemale=0';
+            url += '&targetMaleGeneral=0';
+            url += '&targetMaleFocused=0';
+            url += '&targetMaleGeneralOverlap=0';
+            url += '&targetMaleFocusedOverlap=0';
+            url += '&targetMaleSpecializedOnly=0';
+            url += '&targetFemaleGeneral=0';
+            url += '&targetFemaleFocused=0';
+            url += '&targetFemaleGeneralOverlap=0';
+            url += '&targetFemaleFocusedOverlap=0';
+            url += '&targetFemaleSpecializedOnly=0';
+            url += '&endMaleDeath=0';
+            url += '&endMaleRefusal=0';
+            url += '&endMaleOther=0';
+            url += '&endFemaleDeath=0';
+            url += '&endFemaleRefusal=0';
+            url += '&endFemaleOther=0';
             
-            // 남성 대상자 현황
-            formData.append('targetMaleGeneral', '0');
-            formData.append('targetMaleFocused', '0');
-            formData.append('targetMaleGeneralOverlap', '0');
-            formData.append('targetMaleFocusedOverlap', '0');
-            formData.append('targetMaleSpecializedOnly', '0');
-            
-            // 여성 대상자 현황
-            formData.append('targetFemaleGeneral', '0');
-            formData.append('targetFemaleFocused', '0');
-            formData.append('targetFemaleGeneralOverlap', '0');
-            formData.append('targetFemaleFocusedOverlap', '0');
-            formData.append('targetFemaleSpecializedOnly', '0');
-            
-            // 종결자 현황
-            formData.append('endMaleDeath', '0');
-            formData.append('endMaleRefusal', '0');
-            formData.append('endMaleOther', '0');
-            formData.append('endFemaleDeath', '0');
-            formData.append('endFemaleRefusal', '0');
-            formData.append('endFemaleOther', '0');
-            
-            fetch(scriptUrl, {
-                method: 'POST',
-                // FormData는 자동으로 multipart/form-data로 전송되므로 Content-Type 헤더를 생략
-                body: formData
-            })
+            // GET 방식으로 요청
+            fetch(url)
             .then(response => {
                 alert('제출이 완료되었습니다!');
                 form.reset();

@@ -557,7 +557,7 @@
                 const tempForm = document.createElement('form');
                 tempForm.setAttribute('method', 'post');
                 tempForm.setAttribute('action', scriptUrl);
-                tempForm.setAttribute('target', 'iframe-submission');
+                tempForm.setAttribute('target', 'iframe-submission'); // iframe을 통해 제출하여 페이지 새로고침 방지
                 iframe.setAttribute('name', 'iframe-submission');
                 
                 // 입력 필드 추가 함수 정의
@@ -699,11 +699,15 @@
             // iframe이 로드되면 성공 메시지 표시
             iframe.onload = function() {
                 console.log('iframe loaded - submission complete');
-                alert('제출이 완료되었습니다!');
-                // form.reset(); // 전체 폼 리셋 제거
+                
+                // 숫자 입력 필드 초기화
                 document.querySelectorAll('input[type="number"]').forEach(input => {
                     input.value = "";
                 });
+                
+                // 성공 메시지 표시
+                alert('설문이 성공적으로 제출되었습니다. 감사합니다!');
+                
                 // 임시 요소 제거
                 setTimeout(() => {
                     document.body.removeChild(iframe);

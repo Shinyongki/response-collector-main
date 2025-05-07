@@ -608,51 +608,89 @@
             // Apps Script Web App URL (실제 URL)
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbwWzVKmgzt3TYcrUqOHXZCqhdi8T8uiLWcLP8tcTuL1SeDBcdxlhZsAmP4gN9xoO4ok/exec';
 
-            // 가장 기본적인 방법으로 시도 - URL 쿼리 파라미터 사용
-            let url = scriptUrl + '?';
-            url += 'region=' + encodeURIComponent(region);
-            url += '&institution=' + encodeURIComponent(institution);
-            url += '&institutionCode=' + encodeURIComponent(institutionCode);
+            // 가장 기본적인 방법으로 시도 - 폼 제출 방식으로 변경
+            // 월드 생성
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
+            // 폼 생성
+            const tempForm = document.createElement('form');
+            tempForm.setAttribute('method', 'post');
+            tempForm.setAttribute('action', scriptUrl);
+            tempForm.setAttribute('target', 'iframe-submission');
+            iframe.setAttribute('name', 'iframe-submission');
+            
+            // 입력 필드 추가
+            const addField = (name, value) => {
+                const input = document.createElement('input');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', name);
+                input.setAttribute('value', value || '0');
+                tempForm.appendChild(input);
+            };
+            
+            // 기본 데이터 추가
+            addField('region', region);
+            addField('institution', institution);
+            addField('institutionCode', institutionCode);
             
             // 인력 현황 데이터
-            url += '&socialWorkerMale=' + encodeURIComponent(document.getElementById('social-worker-male').value || '0');
-            url += '&socialWorkerFemale=' + encodeURIComponent(document.getElementById('social-worker-female').value || '0');
-            url += '&caregiverMale=' + encodeURIComponent(document.getElementById('caregiver-male').value || '0');
-            url += '&caregiverFemale=' + encodeURIComponent(document.getElementById('caregiver-female').value || '0');
+            addField('socialWorkerMale', document.getElementById('social-worker-male').value || '0');
+            addField('socialWorkerFemale', document.getElementById('social-worker-female').value || '0');
+            addField('caregiverMale', document.getElementById('caregiver-male').value || '0');
+            addField('caregiverFemale', document.getElementById('caregiver-female').value || '0');
             
             // 나머지 데이터는 고정값으로 설정
-            url += '&newUsersMale=0';
-            url += '&newUsersFemale=0';
-            url += '&targetMaleGeneral=0';
-            url += '&targetMaleFocused=0';
-            url += '&targetMaleGeneralOverlap=0';
-            url += '&targetMaleFocusedOverlap=0';
-            url += '&targetMaleSpecializedOnly=0';
-            url += '&targetFemaleGeneral=0';
-            url += '&targetFemaleFocused=0';
-            url += '&targetFemaleGeneralOverlap=0';
-            url += '&targetFemaleFocusedOverlap=0';
-            url += '&targetFemaleSpecializedOnly=0';
-            url += '&endMaleDeath=0';
-            url += '&endMaleRefusal=0';
-            url += '&endMaleOther=0';
-            url += '&endFemaleDeath=0';
-            url += '&endFemaleRefusal=0';
-            url += '&endFemaleOther=0';
+            addField('newUsersMale', '0');
+            addField('newUsersFemale', '0');
+            addField('targetMaleGeneral', '0');
+            addField('targetMaleFocused', '0');
+            addField('targetMaleGeneralOverlap', '0');
+            addField('targetMaleFocusedOverlap', '0');
+            addField('targetMaleSpecializedOnly', '0');
+            addField('targetFemaleGeneral', '0');
+            addField('targetFemaleFocused', '0');
+            addField('targetFemaleGeneralOverlap', '0');
+            addField('targetFemaleFocusedOverlap', '0');
+            addField('targetFemaleSpecializedOnly', '0');
+            addField('endMaleDeath', '0');
+            addField('endMaleRefusal', '0');
+            addField('endMaleOther', '0');
+            addField('endFemaleDeath', '0');
+            addField('endFemaleRefusal', '0');
+            addField('endFemaleOther', '0');
             
-            // GET 방식으로 요청
-            fetch(url)
-            .then(response => {
+            // 폼을 문서에 추가하고 제출
+            document.body.appendChild(tempForm);
+            console.log('Form submitted with data:', tempForm);
+            
+            // 폼 제출 및 처리
+            tempForm.submit();
+            
+            // iframe이 로드되면 성공 메시지 표시
+            iframe.onload = function() {
                 alert('제출이 완료되었습니다!');
                 form.reset();
-            })
-            .catch(error => {
-                alert('제출 중 오류가 발생했습니다.');
-                console.error(error);
-            });
+                
+                // 임시 요소 제거
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                    document.body.removeChild(tempForm);
+                }, 100);
+            };
             
-            // 원본 데이터도 콘솔에 출력하여 확인
-            console.log('URL with params:', url);
+            // 오류 처리
+            iframe.onerror = function() {
+                alert('제출 중 오류가 발생했습니다.');
+                console.error('Form submission error');
+                
+                // 임시 요소 제거
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                    document.body.removeChild(tempForm);
+                }, 100);
+            };
         });
     });
     </script>

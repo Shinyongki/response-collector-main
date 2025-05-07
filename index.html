@@ -608,48 +608,47 @@
             // Apps Script Web App URL (실제 URL)
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbx9mwX8BYnOHBZ74EafngkdUtaYsqwqHrnTgjRudhZ-veM4NtW80Q8-Fl6-3x4p42-o/exec';
 
-            // 폼 데이터를 URLSearchParams로 변환
-            const formData = new URLSearchParams();
-            // 폼 데이터를 평면화하여 추가
-            formData.append('region', data.region);
-            formData.append('institution', data.institution);
-            formData.append('institutionCode', data.institutionCode);
+            // 직접 폼 데이터 생성 - 가장 기본적인 방법으로 시도
+            const formData = new FormData();
+            formData.append('region', region);
+            formData.append('institution', institution);
+            formData.append('institutionCode', institutionCode);
             
             // 인력 현황 데이터
-            formData.append('personnel_socialWorkerMale', data.personnel.socialWorkerMale);
-            formData.append('personnel_socialWorkerFemale', data.personnel.socialWorkerFemale);
-            formData.append('personnel_caregiverMale', data.personnel.caregiverMale);
-            formData.append('personnel_caregiverFemale', data.personnel.caregiverFemale);
+            formData.append('socialWorkerMale', document.getElementById('social-worker-male').value || '0');
+            formData.append('socialWorkerFemale', document.getElementById('social-worker-female').value || '0');
+            formData.append('caregiverMale', document.getElementById('caregiver-male').value || '0');
+            formData.append('caregiverFemale', document.getElementById('caregiver-female').value || '0');
             
-            // 기타 데이터도 평면화하여 추가
-            formData.append('newUsers_male', data.newUsers.male);
-            formData.append('newUsers_female', data.newUsers.female);
+            // 나머지 데이터는 고정값으로 설정
+            formData.append('newUsersMale', '0');
+            formData.append('newUsersFemale', '0');
             
             // 남성 대상자 현황
-            formData.append('targetMale_general', data.targetMale.general);
-            formData.append('targetMale_focused', data.targetMale.focused);
-            formData.append('targetMale_generalOverlap', data.targetMale.generalOverlap);
-            formData.append('targetMale_focusedOverlap', data.targetMale.focusedOverlap);
-            formData.append('targetMale_specializedOnly', data.targetMale.specializedOnly);
+            formData.append('targetMaleGeneral', '0');
+            formData.append('targetMaleFocused', '0');
+            formData.append('targetMaleGeneralOverlap', '0');
+            formData.append('targetMaleFocusedOverlap', '0');
+            formData.append('targetMaleSpecializedOnly', '0');
             
             // 여성 대상자 현황
-            formData.append('targetFemale_general', data.targetFemale.general);
-            formData.append('targetFemale_focused', data.targetFemale.focused);
-            formData.append('targetFemale_generalOverlap', data.targetFemale.generalOverlap);
-            formData.append('targetFemale_focusedOverlap', data.targetFemale.focusedOverlap);
-            formData.append('targetFemale_specializedOnly', data.targetFemale.specializedOnly);
+            formData.append('targetFemaleGeneral', '0');
+            formData.append('targetFemaleFocused', '0');
+            formData.append('targetFemaleGeneralOverlap', '0');
+            formData.append('targetFemaleFocusedOverlap', '0');
+            formData.append('targetFemaleSpecializedOnly', '0');
             
             // 종결자 현황
-            formData.append('endMale_death', data.endMale.death);
-            formData.append('endMale_refusal', data.endMale.refusal);
-            formData.append('endMale_other', data.endMale.other);
-            formData.append('endFemale_death', data.endFemale.death);
-            formData.append('endFemale_refusal', data.endFemale.refusal);
-            formData.append('endFemale_other', data.endFemale.other);
+            formData.append('endMaleDeath', '0');
+            formData.append('endMaleRefusal', '0');
+            formData.append('endMaleOther', '0');
+            formData.append('endFemaleDeath', '0');
+            formData.append('endFemaleRefusal', '0');
+            formData.append('endFemaleOther', '0');
             
             fetch(scriptUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                // FormData는 자동으로 multipart/form-data로 전송되므로 Content-Type 헤더를 생략
                 body: formData
             })
             .then(response => {

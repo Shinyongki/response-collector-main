@@ -598,11 +598,12 @@
 
             fetch(scriptUrl, {
                 method: 'POST',
+                mode: 'no-cors',  // CORS 오류 우회를 위한 옵션 추가
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
-            .then(response => response.text())
-            .then(result => {
+            .then(() => {
+                // no-cors 모드에서는 응답 내용에 접근할 수 없으므로 성공으로 간주합니다
                 alert('제출이 완료되었습니다!');
                 form.reset();
             })

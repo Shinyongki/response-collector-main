@@ -705,6 +705,14 @@
                 document.querySelectorAll('input[type="number"]').forEach(input => {
                     input.value = "";
                 });
+
+                // 시군, 기관명 select 및 기관코드 input 초기화
+                const regionSelect = document.getElementById('region-select');
+                if (regionSelect) regionSelect.selectedIndex = 0;
+                const institutionSelect = document.getElementById('institution-select');
+                if (institutionSelect) institutionSelect.selectedIndex = 0;
+                const institutionCodeInput = document.getElementById('institution-code');
+                if (institutionCodeInput) institutionCodeInput.value = "";
                 
                 // 성공 메시지 표시
                 alert('설문이 성공적으로 제출되었습니다. 감사합니다!');

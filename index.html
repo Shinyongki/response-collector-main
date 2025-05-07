@@ -608,14 +608,51 @@
             // Apps Script Web App URL (실제 URL)
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbwZq1UwJQHRnX_LCGDIfYyHGvuUposy-lyFMvLrFkBMzpbUoxPyXPsqfC9nKjO7uFNB/exec';
 
+            // 폼 데이터를 URLSearchParams로 변환
+            const formData = new URLSearchParams();
+            // 폼 데이터를 평면화하여 추가
+            formData.append('region', data.region);
+            formData.append('institution', data.institution);
+            formData.append('institutionCode', data.institutionCode);
+            
+            // 인력 현황 데이터
+            formData.append('personnel_socialWorkerMale', data.personnel.socialWorkerMale);
+            formData.append('personnel_socialWorkerFemale', data.personnel.socialWorkerFemale);
+            formData.append('personnel_caregiverMale', data.personnel.caregiverMale);
+            formData.append('personnel_caregiverFemale', data.personnel.caregiverFemale);
+            
+            // 기타 데이터도 평면화하여 추가
+            formData.append('newUsers_male', data.newUsers.male);
+            formData.append('newUsers_female', data.newUsers.female);
+            
+            // 남성 대상자 현황
+            formData.append('targetMale_general', data.targetMale.general);
+            formData.append('targetMale_focused', data.targetMale.focused);
+            formData.append('targetMale_generalOverlap', data.targetMale.generalOverlap);
+            formData.append('targetMale_focusedOverlap', data.targetMale.focusedOverlap);
+            formData.append('targetMale_specializedOnly', data.targetMale.specializedOnly);
+            
+            // 여성 대상자 현황
+            formData.append('targetFemale_general', data.targetFemale.general);
+            formData.append('targetFemale_focused', data.targetFemale.focused);
+            formData.append('targetFemale_generalOverlap', data.targetFemale.generalOverlap);
+            formData.append('targetFemale_focusedOverlap', data.targetFemale.focusedOverlap);
+            formData.append('targetFemale_specializedOnly', data.targetFemale.specializedOnly);
+            
+            // 종결자 현황
+            formData.append('endMale_death', data.endMale.death);
+            formData.append('endMale_refusal', data.endMale.refusal);
+            formData.append('endMale_other', data.endMale.other);
+            formData.append('endFemale_death', data.endFemale.death);
+            formData.append('endFemale_refusal', data.endFemale.refusal);
+            formData.append('endFemale_other', data.endFemale.other);
+            
             fetch(scriptUrl, {
                 method: 'POST',
-                mode: 'no-cors',  // CORS 오류 우회를 위한 옵션 추가
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData
             })
-            .then(() => {
-                // no-cors 모드에서는 응답 내용에 접근할 수 없으므로 성공으로 간주합니다
+            .then(response => {
                 alert('제출이 완료되었습니다!');
                 form.reset();
             })
@@ -623,6 +660,9 @@
                 alert('제출 중 오류가 발생했습니다.');
                 console.error(error);
             });
+            
+            // 원본 데이터도 콘솔에 출력하여 확인
+            console.log('Form data:', formData.toString());
         });
     });
     </script>

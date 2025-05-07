@@ -172,10 +172,10 @@
                         <tbody>
                             <tr>
                                 <td class="font-medium">인원 수</td>
-                                <td><input type="number" name="social-worker-male" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                <td><input type="number" name="social-worker-female" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                <td><input type="number" name="caregiver-male" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
-                                <td><input type="number" name="caregiver-female" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" id="social-worker-male" name="social-worker-male" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" id="social-worker-female" name="social-worker-female" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" id="caregiver-male" name="caregiver-male" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" id="caregiver-female" name="caregiver-female" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -585,12 +585,24 @@
             // const staffMale = document.getElementById('staff-male').value;
             // ...
 
-            // 데이터 객체 생성
+            // 데이터 객체 생성 - Google Apps Script에서 기대하는 구조로 맞춤
             const data = {
-                region,
-                institution,
-                institutionCode
-                // 추가 입력값도 포함
+                region: region,
+                institution: institution,
+                institutionCode: institutionCode,
+                // 인력 현황 데이터 (임시로 빈 객체 생성)
+                personnel: {
+                    socialWorkerMale: document.getElementById('social-worker-male')?.value || '0',
+                    socialWorkerFemale: document.getElementById('social-worker-female')?.value || '0',
+                    caregiverMale: document.getElementById('caregiver-male')?.value || '0',
+                    caregiverFemale: document.getElementById('caregiver-female')?.value || '0'
+                },
+                // 기타 필요한 데이터 구조 추가
+                newUsers: { male: '0', female: '0' },
+                targetMale: { general: '0', focused: '0', generalOverlap: '0', focusedOverlap: '0', specializedOnly: '0' },
+                targetFemale: { general: '0', focused: '0', generalOverlap: '0', focusedOverlap: '0', specializedOnly: '0' },
+                endMale: { death: '0', refusal: '0', other: '0' },
+                endFemale: { death: '0', refusal: '0', other: '0' }
             };
 
             // Apps Script Web App URL (실제 URL)

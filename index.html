@@ -627,9 +627,9 @@
                 input.setAttribute('type', 'hidden');
                 input.setAttribute('name', name);
                 
-                // 값이 없으면 '0'으로 설정 (스프레드시트에서 예상하는 형식)
+                // 값이 없으면 빈 문자열로 설정 (실제 값이 없음을 구분하기 위해)
                 if (value === undefined || value === null || value === '') {
-                    input.setAttribute('value', '0');
+                    input.setAttribute('value', '');
                 } else {
                     input.setAttribute('value', value.toString());
                 }
@@ -637,10 +637,10 @@
                 tempForm.appendChild(input);
             };
             
-            // 기본 데이터 추가 - 시군, 기관명, 기관코드는 문자열 그대로 전송
-            addField('region', region);
-            addField('institution', institution);
-            addField('institutionCode', institutionCode);
+            // 기본 데이터 추가 - 시군, 기관명, 기관코드는 select 요소에서 직접 값을 가져옴
+            addField('region', document.getElementById('region-select').value);
+            addField('institution', document.getElementById('institution-select').value);
+            addField('institutionCode', document.getElementById('institution-code').value);
             
             // 안전한 값 가져오기 함수
             const safeGetValue = (id) => {
@@ -654,33 +654,33 @@
             addField('caregiverMale', safeGetValue('caregiver-male'));
             addField('caregiverFemale', safeGetValue('caregiver-female'));
             
-            // 신규 대상자 데이터 - 기본값 0 사용
-            addField('newUsersMale', '0');
-            addField('newUsersFemale', '0');
+            // 신규 대상자 데이터 - 실제 입력값 사용
+            addField('newUsersMale', safeGetValue('new-users-male'));
+            addField('newUsersFemale', safeGetValue('new-users-female'));
             
-            // 대상자 현황 데이터 - 남성 (기본값 0 사용)
-            addField('targetMaleGeneral', '0');
-            addField('targetMaleFocused', '0');
-            addField('targetMaleGeneralOverlap', '0');
-            addField('targetMaleFocusedOverlap', '0');
-            addField('targetMaleSpecializedOnly', '0');
+            // 대상자 현황 데이터 - 남성 (실제 입력값 사용)
+            addField('targetMaleGeneral', safeGetValue('target-male-general'));
+            addField('targetMaleFocused', safeGetValue('target-male-focused'));
+            addField('targetMaleGeneralOverlap', safeGetValue('target-male-general-overlap'));
+            addField('targetMaleFocusedOverlap', safeGetValue('target-male-focused-overlap'));
+            addField('targetMaleSpecializedOnly', safeGetValue('target-male-specialized-only'));
             
-            // 대상자 현황 데이터 - 여성 (기본값 0 사용)
-            addField('targetFemaleGeneral', '0');
-            addField('targetFemaleFocused', '0');
-            addField('targetFemaleGeneralOverlap', '0');
-            addField('targetFemaleFocusedOverlap', '0');
-            addField('targetFemaleSpecializedOnly', '0');
+            // 대상자 현황 데이터 - 여성 (실제 입력값 사용)
+            addField('targetFemaleGeneral', safeGetValue('target-female-general'));
+            addField('targetFemaleFocused', safeGetValue('target-female-focused'));
+            addField('targetFemaleGeneralOverlap', safeGetValue('target-female-general-overlap'));
+            addField('targetFemaleFocusedOverlap', safeGetValue('target-female-focused-overlap'));
+            addField('targetFemaleSpecializedOnly', safeGetValue('target-female-specialized-only'));
             
-            // 종결 대상자 데이터 - 남성 (기본값 0 사용)
-            addField('endMaleDeath', '0');
-            addField('endMaleRefusal', '0');
-            addField('endMaleOther', '0');
+            // 종결 대상자 데이터 - 남성 (실제 입력값 사용)
+            addField('endMaleDeath', safeGetValue('end-male-death'));
+            addField('endMaleRefusal', safeGetValue('end-male-refusal'));
+            addField('endMaleOther', safeGetValue('end-male-other'));
             
-            // 종결 대상자 데이터 - 여성 (기본값 0 사용)
-            addField('endFemaleDeath', '0');
-            addField('endFemaleRefusal', '0');
-            addField('endFemaleOther', '0');
+            // 종결 대상자 데이터 - 여성 (실제 입력값 사용)
+            addField('endFemaleDeath', safeGetValue('end-female-death'));
+            addField('endFemaleRefusal', safeGetValue('end-female-refusal'));
+            addField('endFemaleOther', safeGetValue('end-female-other'));
             
             // 폼을 문서에 추가하고 제출
             document.body.appendChild(tempForm);

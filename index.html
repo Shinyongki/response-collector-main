@@ -550,6 +550,7 @@
 
                 // iframe 생성
                 const iframe = document.createElement('iframe');
+                iframe.setAttribute('name', 'iframe-submission'); // name 속성 먼저 지정
                 iframe.style.display = 'none';
                 document.body.appendChild(iframe);
                 
@@ -558,7 +559,7 @@
                 tempForm.setAttribute('method', 'post');
                 tempForm.setAttribute('action', scriptUrl);
                 tempForm.setAttribute('target', 'iframe-submission'); // iframe을 통해 제출하여 페이지 새로고침 방지
-                iframe.setAttribute('name', 'iframe-submission');
+                // name 속성은 이미 위에서 지정함
                 
                 // 입력 필드 추가 함수 정의
                 const addField = (name, value) => {

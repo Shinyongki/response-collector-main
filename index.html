@@ -577,8 +577,8 @@
             event.preventDefault();
             console.log('폼 제출 시작');
             
-            // Apps Script Web App URL (실제 URL)
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxqCgVsmFMz836l4hjWCNLKJ0XwqKVPT9FhT72Pue-4-rIm2D3tcd6GgGUynjosi0zE/exec';
+            // Apps Script Web App URL (최신 URL)
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbys6q2XCv6KYVJskSOkTNzX7PwiKzldLygqeknXXlpK1qSfQ4dPVuwhWSgBfVRdBC1k/exec';
 
             // 가장 기본적인 방법으로 시도 - 폼 제출 방식으로 변경
             // 월드 생성
@@ -622,30 +622,26 @@
             addField('institution', institutionSelect.value);
             addField('institutionCode', institutionCodeInput.value);
             
-            // 안전한 값 가져오기 함수
+            // 안전한 값 가져오기 함수 (개선버전)
             const safeGetValue = (id) => {
                 const element = document.getElementById(id);
                 if (!element) {
                     console.log('요소를 찾을 수 없음:', id);
                     return '';
                 }
-                console.log(id + ' 값:', element.value);
-                return element.value;
+                const value = element.value || '';
+                console.log(id + ' 값:', value);
+                return value;
             };
             
-            // 인력 현황 데이터
-            const socialWorkerMale = document.getElementById('social-worker-male');
-            const socialWorkerFemale = document.getElementById('social-worker-female');
-            const caregiverMale = document.getElementById('caregiver-male');
-            const caregiverFemale = document.getElementById('caregiver-female');
+            // 인력 현황 데이터 (개선된 방식으로 접근)
+            console.log('전담사회복지사(남):', safeGetValue('social-worker-male'));
+            console.log('전담사회복지사(여):', safeGetValue('social-worker-female'));
             
-            console.log('전담사회복지사(남):', socialWorkerMale ? socialWorkerMale.value : '없음');
-            console.log('전담사회복지사(여):', socialWorkerFemale ? socialWorkerFemale.value : '없음');
-            
-            addField('socialWorkerMale', socialWorkerMale ? socialWorkerMale.value : '');
-            addField('socialWorkerFemale', socialWorkerFemale ? socialWorkerFemale.value : '');
-            addField('caregiverMale', caregiverMale ? caregiverMale.value : '');
-            addField('caregiverFemale', caregiverFemale ? caregiverFemale.value : '');
+            addField('socialWorkerMale', safeGetValue('social-worker-male'));
+            addField('socialWorkerFemale', safeGetValue('social-worker-female'));
+            addField('caregiverMale', safeGetValue('caregiver-male'));
+            addField('caregiverFemale', safeGetValue('caregiver-female'));
             
             // 신규 대상자 데이터 - 실제 입력값 사용
             addField('newUsersMale', safeGetValue('new-users-male'));
@@ -684,6 +680,7 @@
             
             // iframe이 로드되면 성공 메시지 표시
             iframe.onload = function() {
+                console.log('iframe loaded - submission complete');
                 alert('제출이 완료되었습니다!');
                 form.reset();
                 
@@ -695,9 +692,9 @@
             };
             
             // 오류 처리
-            iframe.onerror = function() {
+            iframe.onerror = function(error) {
+                console.error('Form submission error:', error);
                 alert('제출 중 오류가 발생했습니다.');
-                console.error('Form submission error');
                 
                 // 임시 요소 제거
                 setTimeout(() => {
@@ -705,6 +702,12 @@
                     document.body.removeChild(tempForm);
                 }, 100);
             };
+            
+            // 추가 디버깅 정보를 위한 iframe 로드 이벤트 리스너
+            tempForm.addEventListener('submit', function() {
+                console.log('Form submitted to:', scriptUrl);
+                console.log('Form data keys:', Object.keys(tempForm.elements).map(key => tempForm.elements[key].name).filter(name => name));
+            });
         });
     });
     </script>

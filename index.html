@@ -44,6 +44,7 @@
             padding: 2px !important;
             font-size: 0.875rem;
             -moz-appearance: textfield; /* Firefox */
+            appearance: textfield; /* 표준 속성 추가 */
         }
         
         /* Chrome, Safari, Edge, Opera에서 화살표 숨기기 */
@@ -577,6 +578,24 @@
             event.preventDefault();
             console.log('폼 제출 시작 - ' + new Date().toISOString());
             
+            // 필수 필드 검증 - 전역 변수로 선언하지 않고 사용
+            let regionSelect = document.getElementById('region-select');
+            let institutionSelect = document.getElementById('institution-select');
+            
+            // 시군 검증
+            if (!regionSelect || !regionSelect.value) {
+                alert('시군을 선택해주세요.');
+                if (regionSelect) regionSelect.focus();
+                return;
+            }
+            
+            // 기관명 검증
+            if (!institutionSelect || !institutionSelect.value) {
+                alert('기관명을 선택해주세요.');
+                if (institutionSelect) institutionSelect.focus();
+                return;
+            }
+            
             // Apps Script Web App URL (최신 URL)
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbys6q2XCv6KYVJskSOkTNzX7PwiKzldLygqeknXXlpK1qSfQ4dPVuwhWSgBfVRdBC1k/exec';
 
@@ -609,14 +628,13 @@
                 tempForm.appendChild(input);
             };
             
-            // 기본 데이터 추가 - 시군, 기관명, 기관코드는 select 요소에서 직접 값을 가져옴
-            const regionSelect = document.getElementById('region-select');
-            const institutionSelect = document.getElementById('institution-select');
+            // 기본 데이터 추가 - 이미 위에서 선언한 변수 재사용
             const institutionCodeInput = document.getElementById('institution-code');
             
             // 시군, 기관명, 기관코드 값 확인 및 디버깅
-            const regionValue = regionSelect ? regionSelect.value : '';
-            const institutionValue = institutionSelect ? institutionSelect.value : '';
+            // 이미 위에서 검증했으니 반드시 값이 있음
+            const regionValue = regionSelect.value;
+            const institutionValue = institutionSelect.value;
             const institutionCodeValue = institutionCodeInput ? institutionCodeInput.value : '';
             
             console.log('시군 요소:', regionSelect, '시군 값:', regionValue);
@@ -628,54 +646,57 @@
             addField('institution', '' + institutionValue);
             addField('institutionCode', '' + institutionCodeValue);
             
-            // 안전한 값 가져오기 함수 (개선버전)
+            // 안전한 값 가져오기 함수 (개선버전 - 기본값 0 추가)
             const safeGetValue = (id) => {
                 const element = document.getElementById(id);
                 if (!element) {
                     console.log('요소를 찾을 수 없음:', id);
-                    return '';
+                    return '0'; // 기본값으로 0 반환
                 }
-                const value = element.value || '';
+                const value = element.value || '0';
                 console.log(id + ' 값:', value);
                 return value;
             };
             
-            // 인력 현황 데이터 (개선된 방식으로 접근)
-            console.log('전담사회복지사(남):', safeGetValue('social-worker-male'));
-            console.log('전담사회복지사(여):', safeGetValue('social-worker-female'));
+            // 인력 현황 데이터 - 기본값 0 설정 (개선된 방식)
+            const socialWorkerMaleValue = safeGetValue('social-worker-male') || '0';
+            const socialWorkerFemaleValue = safeGetValue('social-worker-female') || '0';
             
-            addField('socialWorkerMale', safeGetValue('social-worker-male'));
-            addField('socialWorkerFemale', safeGetValue('social-worker-female'));
-            addField('caregiverMale', safeGetValue('caregiver-male'));
-            addField('caregiverFemale', safeGetValue('caregiver-female'));
+            console.log('전담사회복지사(남):', socialWorkerMaleValue);
+            console.log('전담사회복지사(여):', socialWorkerFemaleValue);
             
-            // 신규 대상자 데이터 - 실제 입력값 사용
-            addField('newUsersMale', safeGetValue('new-users-male'));
-            addField('newUsersFemale', safeGetValue('new-users-female'));
+            addField('socialWorkerMale', socialWorkerMaleValue);
+            addField('socialWorkerFemale', socialWorkerFemaleValue);
+            addField('caregiverMale', safeGetValue('caregiver-male') || '0');
+            addField('caregiverFemale', safeGetValue('caregiver-female') || '0');
             
-            // 대상자 현황 데이터 - 남성 (실제 입력값 사용)
-            addField('targetMaleGeneral', safeGetValue('target-male-general'));
-            addField('targetMaleFocused', safeGetValue('target-male-focused'));
-            addField('targetMaleGeneralOverlap', safeGetValue('target-male-general-overlap'));
-            addField('targetMaleFocusedOverlap', safeGetValue('target-male-focused-overlap'));
-            addField('targetMaleSpecializedOnly', safeGetValue('target-male-specialized-only'));
+            // 신규 대상자 데이터 - 기본값 0 설정
+            addField('newUsersMale', safeGetValue('new-users-male') || '0');
+            addField('newUsersFemale', safeGetValue('new-users-female') || '0');
             
-            // 대상자 현황 데이터 - 여성 (실제 입력값 사용)
-            addField('targetFemaleGeneral', safeGetValue('target-female-general'));
-            addField('targetFemaleFocused', safeGetValue('target-female-focused'));
-            addField('targetFemaleGeneralOverlap', safeGetValue('target-female-general-overlap'));
-            addField('targetFemaleFocusedOverlap', safeGetValue('target-female-focused-overlap'));
-            addField('targetFemaleSpecializedOnly', safeGetValue('target-female-specialized-only'));
+            // 대상자 현황 데이터 - 남성 (기본값 0 설정)
+            addField('targetMaleGeneral', safeGetValue('target-male-general') || '0');
+            addField('targetMaleFocused', safeGetValue('target-male-focused') || '0');
+            addField('targetMaleGeneralOverlap', safeGetValue('target-male-general-overlap') || '0');
+            addField('targetMaleFocusedOverlap', safeGetValue('target-male-focused-overlap') || '0');
+            addField('targetMaleSpecializedOnly', safeGetValue('target-male-specialized-only') || '0');
             
-            // 종결 대상자 데이터 - 남성 (실제 입력값 사용)
-            addField('endMaleDeath', safeGetValue('end-male-death'));
-            addField('endMaleRefusal', safeGetValue('end-male-refusal'));
-            addField('endMaleOther', safeGetValue('end-male-other'));
+            // 대상자 현황 데이터 - 여성 (기본값 0 설정)
+            addField('targetFemaleGeneral', safeGetValue('target-female-general') || '0');
+            addField('targetFemaleFocused', safeGetValue('target-female-focused') || '0');
+            addField('targetFemaleGeneralOverlap', safeGetValue('target-female-general-overlap') || '0');
+            addField('targetFemaleFocusedOverlap', safeGetValue('target-female-focused-overlap') || '0');
+            addField('targetFemaleSpecializedOnly', safeGetValue('target-female-specialized-only') || '0');
             
-            // 종결 대상자 데이터 - 여성 (실제 입력값 사용)
-            addField('endFemaleDeath', safeGetValue('end-female-death'));
-            addField('endFemaleRefusal', safeGetValue('end-female-refusal'));
-            addField('endFemaleOther', safeGetValue('end-female-other'));
+            // 종결 대상자 데이터 - 남성 (기본값 0 설정)
+            addField('endMaleDeath', safeGetValue('end-male-death') || '0');
+            addField('endMaleRefusal', safeGetValue('end-male-refusal') || '0');
+            addField('endMaleOther', safeGetValue('end-male-other') || '0');
+            
+            // 종결 대상자 데이터 - 여성 (기본값 0 설정)
+            addField('endFemaleDeath', safeGetValue('end-female-death') || '0');
+            addField('endFemaleRefusal', safeGetValue('end-female-refusal') || '0');
+            addField('endFemaleOther', safeGetValue('end-female-other') || '0');
             
             // 전송 데이터 확인
             const formData = new FormData(tempForm);
@@ -695,7 +716,13 @@
             console.log('Form submitted with data:', tempForm);
             
             // 폼 제출 및 처리
-            tempForm.submit();
+            try {
+                tempForm.submit();
+                console.log('폼 제출 완료');
+            } catch (error) {
+                console.error('폼 제출 중 오류:', error);
+                alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+            }
             
             // iframe이 로드되면 성공 메시지 표시
             iframe.onload = function() {

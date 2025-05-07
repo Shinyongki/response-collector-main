@@ -575,7 +575,7 @@
         const form = document.getElementById('elderly-care-form');
         form.addEventListener('submit', function(event) {
             event.preventDefault();
-            console.log('폼 제출 시작');
+            console.log('폼 제출 시작 - ' + new Date().toISOString());
             
             // Apps Script Web App URL (최신 URL)
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbys6q2XCv6KYVJskSOkTNzX7PwiKzldLygqeknXXlpK1qSfQ4dPVuwhWSgBfVRdBC1k/exec';
@@ -614,13 +614,19 @@
             const institutionSelect = document.getElementById('institution-select');
             const institutionCodeInput = document.getElementById('institution-code');
             
-            console.log('시군:', regionSelect.value);
-            console.log('기관명:', institutionSelect.value);
-            console.log('기관코드:', institutionCodeInput.value);
+            // 시군, 기관명, 기관코드 값 확인 및 디버깅
+            const regionValue = regionSelect ? regionSelect.value : '';
+            const institutionValue = institutionSelect ? institutionSelect.value : '';
+            const institutionCodeValue = institutionCodeInput ? institutionCodeInput.value : '';
             
-            addField('region', regionSelect.value);
-            addField('institution', institutionSelect.value);
-            addField('institutionCode', institutionCodeInput.value);
+            console.log('시군 요소:', regionSelect, '시군 값:', regionValue);
+            console.log('기관명 요소:', institutionSelect, '기관명 값:', institutionValue);
+            console.log('기관코드 요소:', institutionCodeInput, '기관코드 값:', institutionCodeValue);
+            
+            // 값을 직접 추출하여 전송 - 리터럴 문자열로 전달하여 정확히 전송되도록 함
+            addField('region', '' + regionValue);
+            addField('institution', '' + institutionValue);
+            addField('institutionCode', '' + institutionCodeValue);
             
             // 안전한 값 가져오기 함수 (개선버전)
             const safeGetValue = (id) => {
@@ -670,6 +676,19 @@
             addField('endFemaleDeath', safeGetValue('end-female-death'));
             addField('endFemaleRefusal', safeGetValue('end-female-refusal'));
             addField('endFemaleOther', safeGetValue('end-female-other'));
+            
+            // 전송 데이터 확인
+            const formData = new FormData(tempForm);
+            const formDataEntries = Array.from(formData.entries());
+            console.log('전송 데이터 항목:', formDataEntries);
+            
+            // 폼에 있는 모든 필드의 이름과 값을 출력
+            const formElements = tempForm.elements;
+            for (let i = 0; i < formElements.length; i++) {
+                if (formElements[i].name) {
+                    console.log(`폼 필드: ${formElements[i].name} = ${formElements[i].value}`);
+                }
+            }
             
             // 폼을 문서에 추가하고 제출
             document.body.appendChild(tempForm);

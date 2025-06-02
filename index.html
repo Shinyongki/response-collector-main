@@ -284,9 +284,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="number" name="mar-end-male-death" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="25"></td>
-                                    <td><input type="number" name="mar-end-male-refusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="31"></td>
-                                    <td><input type="number" name="mar-end-male-other" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="280"></td>
+                                    <td><input type="number" name="may-end-male-death" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0"></td>
+                                    <td><input type="number" name="may-end-male-refusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0"></td>
+                                    <td><input type="number" name="may-end-male-other" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -305,9 +305,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="number" name="mar-end-female-death" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="98"></td>
-                                    <td><input type="number" name="mar-end-female-refusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="65"></td>
-                                    <td><input type="number" name="mar-end-female-other" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="152"></td>
+                                    <td><input type="number" name="may-end-female-death" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0"></td>
+                                    <td><input type="number" name="may-end-female-refusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0"></td>
+                                    <td><input type="number" name="may-end-female-other" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -336,8 +336,8 @@
                 caregiverMale: document.querySelector('input[name="caregiver-male"]')?.value || "0",
                 caregiverFemale: document.querySelector('input[name="caregiver-female"]')?.value || "0",
                 
-                newUsersMale: "0",
-                newUsersFemale: "0",
+                newUsersMale: document.querySelector('input[name="may-new-male"]')?.value || "0",
+                newUsersFemale: document.querySelector('input[name="may-new-female"]')?.value || "0",
                 
                 targetMaleGeneral: document.querySelector('input[name="target-male-general"]')?.value || "0",
                 targetMaleFocused: document.querySelector('input[name="target-male-focused"]')?.value || "0",
@@ -351,12 +351,12 @@
                 targetFemaleFocusedOverlap: document.querySelector('input[name="target-female-focused-overlap"]')?.value || "0",
                 targetFemaleSpecializedOnly: document.querySelector('input[name="target-female-specialized-only"]')?.value || "0",
                 
-                endMaleDeath: "0",
-                endMaleRefusal: "0",
-                endMaleOther: "0",
-                endFemaleDeath: "0",
-                endFemaleRefusal: "0",
-                endFemaleOther: "0"
+                endMaleDeath: document.querySelector('input[name="may-end-male-death"]')?.value || "0",
+                endMaleRefusal: document.querySelector('input[name="may-end-male-refusal"]')?.value || "0",
+                endMaleOther: document.querySelector('input[name="may-end-male-other"]')?.value || "0",
+                endFemaleDeath: document.querySelector('input[name="may-end-female-death"]')?.value || "0",
+                endFemaleRefusal: document.querySelector('input[name="may-end-female-refusal"]')?.value || "0",
+                endFemaleOther: document.querySelector('input[name="may-end-female-other"]')?.value || "0"
             };
 
             // 즉시 성공 메시지 표시

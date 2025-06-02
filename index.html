@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노인맞춤돌봄서비스 종사자 대상자 현황 조사(5월)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .form-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            position: relative;
+            padding-left: 1rem;
+        }
+        
+        .section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 70%;
+            background-color: #3b82f6;
+            border-radius: 4px;
+        }
+        
+        .number-input {
+            text-align: center;
+            width: 100%;
+            min-width: 40px;
+            max-width: 60px;
+            padding: 2px !important;
+            font-size: 0.875rem;
+            -moz-appearance: textfield; /* Firefox */
+        }
+        
+        /* Chrome, Safari, Edge, Opera에서 화살표 숨기기 */
+        .number-input::-webkit-outer-spin-button,
+        .number-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* 숫자 입력 필드 스타일 */
+        input[type="number"].number-input {
+            background-color: #f9fafb;
+            border: 1px solid #d1d5db;
+            transition: all 0.2s;
+        }
+        
+        input[type="number"].number-input:focus {
+            background-color: #fff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+        }
+        
+        th, td {
+            padding: 0.5rem 0.25rem;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            font-size: 0.85rem;
+        }
+        
+        th {
+            background-color: #f3f4f6;
+            font-weight: 500;
+        }
+        
+        .nested-header {
+            background-color: #edf2f7;
+        }
+        
+        .btn-submit {
+            background-color: #3b82f6;
+            transition: all 0.2s ease;
+            transform: translateY(0);
+        }
+        
+        .btn-submit:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        
+        .compact-table th, .compact-table td {
+            padding: 0.375rem 0.125rem;
+        }
+        
+        @media (max-width: 1200px) {
+            .responsive-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="py-4 px-4">
+    <div class="max-w-full mx-auto">
+        <header class="mb-6 text-center">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">노인맞춤돌봄서비스 종사자 대상자 현황 조사(4월)</h1>
+            <p class="text-sm text-gray-600">2025년 4월 30일 기준으로 기재해 주시기 바랍니다.</p>
+        </header>
+        
+        <form id="elderly-care-form" class="form-container p-4">
+            <!-- 기관 정보 섹션 -->
+            <div class="mb-6">
+                <h2 class="section-title text-lg font-medium text-gray-800 mb-4">기관 정보</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="region-select" class="block text-gray-700 mb-1 text-sm">시군 선택</label>
+                        <select id="region-select" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">시군을 선택하세요</option>
+                            <option value="창원시">창원시</option>
+                            <option value="진주시">진주시</option>
+                            <option value="통영시">통영시</option>
+                            <option value="사천시">사천시</option>
+                            <option value="김해시">김해시</option>
+                            <option value="밀양시">밀양시</option>
+                            <option value="거제시">거제시</option>
+                            <option value="양산시">양산시</option>
+                            <option value="의령군">의령군</option>
+                            <option value="함안군">함안군</option>
+                            <option value="창녕군">창녕군</option>
+                            <option value="고성군">고성군</option>
+                            <option value="남해군">남해군</option>
+                            <option value="하동군">하동군</option>
+                            <option value="산청군">산청군</option>
+                            <option value="함양군">함양군</option>
+                            <option value="거창군">거창군</option>
+                            <option value="합천군">합천군</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="institution-select" class="block text-gray-700 mb-1 text-sm">기관명</label>
+                        <select id="institution-select" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" disabled>
+                            <option value="">기관명을 선택하세요</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="institution-code" class="block text-gray-700 mb-1 text-sm">기관코드</label>
+                        <input type="text" id="institution-code" name="institution-code" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100" readonly>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 섹션들을 그리드로 배치 -->
+            <div class="grid responsive-grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- 인력 현황 섹션 -->
+                <div class="mb-6">
+                    <h2 class="section-title text-lg font-medium text-gray-800 mb-4">인력 현황</h2>
+                    <table class="w-full compact-table">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>전담사회복지사(남)</th>
+                                <th>전담사회복지사(여)</th>
+                                <th>생활지원사(남)</th>
+                                <th>생활지원사(여)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-medium">인원 수</td>
+                                <td><input type="number" name="social-worker-male" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" name="social-worker-female" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" name="caregiver-male" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" name="caregiver-female" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 서비스 이용자 현황 섹션 -->
+                <div class="mb-6">
+                    <h2 class="section-title text-lg font-medium text-gray-800 mb-4">서비스 이용자 현황</h2>
+                    <table class="w-full compact-table">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>4월신규(남)</th>
+                                <th>4월신규(여)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-medium">인원 수</td>
+                                <td><input type="number" name="mar-new-male" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                <td><input type="number" name="mar-new-female" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 대상자 현황 섹션 - 카테고리 재구성 -->
+            <div class="mb-6">
+                <h2 class="section-title text-lg font-medium text-gray-800 mb-4">대상자 현황</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- 남성 대상자 -->
+                    <div>
+                        <h3 class="text-md font-medium text-gray-800 mb-2">남성 대상자</h3>
+                        <table class="w-full compact-table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">일반</th>
+                                    <th rowspan="2">중점</th>
+                                    <th colspan="3">특화</th>
+                                </tr>
+                                <tr>
+                                    <th>일반(중복)</th>
+                                    <th>중점(중복)</th>
+                                    <th>특화(단독)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="number" name="target-male-general" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" name="target-male-focused" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" name="target-male-general-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" name="target-male-focused-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" name="target-male-specialized-only" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 여성 대상자 -->
+                    <div>
+                        <h3 class="text-md font-medium text-gray-800 mb-2">여성 대상자</h3>
+                        <table class="w-full compact-table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">일반</th>
+                                    <th rowspan="2">중점</th>
+                                    <th colspan="3">특화</th>
+                                </tr>
+                                <tr>
+                                    <th>일반(중복)</th>
+                                    <th>중점(중복)</th>
+                                    <th>특화(단독)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="number" name="target-female-general" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" name="target-female-focused" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" name="target-female-general-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" name="target-female-focused-overlap" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                    <td><input type="number" name="target-female-specialized-only" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="0" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 종결자 현황 섹션 - 5월 종결자만 표시 -->
+            <div class="mb-6">
+                <h2 class="section-title text-lg font-medium text-gray-800 mb-4">종결자 현황</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- 5월 종결자 (남성) -->
+                    <div>
+                        <h3 class="text-md font-medium text-gray-800 mb-2">5월 종결자 (남성)</h3>
+                        <table class="w-full compact-table">
+                            <thead>
+                                <tr>
+                                    <th>사망</th>
+                                    <th>서비스거부</th>
+                                    <th>기타</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="number" name="mar-end-male-death" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="25"></td>
+                                    <td><input type="number" name="mar-end-male-refusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="31"></td>
+                                    <td><input type="number" name="mar-end-male-other" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="280"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 5월 종결자 (여성) -->
+                    <div>
+                        <h3 class="text-md font-medium text-gray-800 mb-2">5월 종결자 (여성)</h3>
+                        <table class="w-full compact-table">
+                            <thead>
+                                <tr>
+                                    <th>사망</th>
+                                    <th>서비스거부</th>
+                                    <th>기타</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="number" name="mar-end-female-death" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="98"></td>
+                                    <td><input type="number" name="mar-end-female-refusal" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="65"></td>
+                                    <td><input type="number" name="mar-end-female-other" class="px-1 py-1 border border-gray-300 rounded-md number-input" value="152"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 제출 버튼 -->
+            <div class="flex justify-center mt-6 gap-4">
+                <button type="submit" class="btn-submit px-6 py-2 text-white font-medium rounded-md shadow-md">제출하기</button>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('elderly-care-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // 폼 데이터 수집
+            const formData = {
+                region: document.getElementById('region-select').value,
+                institution: document.getElementById('institution-select').value,
+                institutionCode: document.getElementById('institution-code').value,
+                personnel: {
+                    socialWorkerMale: document.querySelector('input[name="social-worker-male"]').value || "0",
+                    socialWorkerFemale: document.querySelector('input[name="social-worker-female"]').value || "0",
+                    caregiverMale: document.querySelector('input[name="caregiver-male"]').value || "0",
+                    caregiverFemale: document.querySelector('input[name="caregiver-female"]').value || "0"
+                },
+                newUsers: {
+                    male: document.querySelector('input[name="mar-new-male"]').value || "0",
+                    female: document.querySelector('input[name="mar-new-female"]').value || "0"
+                },
+                targetMale: {
+                    general: document.querySelector('input[name="target-male-general"]').value || "0",
+                    focused: document.querySelector('input[name="target-male-focused"]').value || "0",
+                    generalOverlap: document.querySelector('input[name="target-male-general-overlap"]').value || "0",
+                    focusedOverlap: document.querySelector('input[name="target-male-focused-overlap"]').value || "0",
+                    specializedOnly: document.querySelector('input[name="target-male-specialized-only"]').value || "0"
+                },
+                targetFemale: {
+                    general: document.querySelector('input[name="target-female-general"]').value || "0",
+                    focused: document.querySelector('input[name="target-female-focused"]').value || "0",
+                    generalOverlap: document.querySelector('input[name="target-female-general-overlap"]').value || "0",
+                    focusedOverlap: document.querySelector('input[name="target-female-focused-overlap"]').value || "0",
+                    specializedOnly: document.querySelector('input[name="target-female-specialized-only"]').value || "0"
+                },
+                endMale: {
+                    death: document.querySelector('input[name="mar-end-male-death"]').value || "0",
+                    refusal: document.querySelector('input[name="mar-end-male-refusal"]').value || "0",
+                    other: document.querySelector('input[name="mar-end-male-other"]').value || "0"
+                },
+                endFemale: {
+                    death: document.querySelector('input[name="mar-end-female-death"]').value || "0",
+                    refusal: document.querySelector('input[name="mar-end-female-refusal"]').value || "0",
+                    other: document.querySelector('input[name="mar-end-female-other"]').value || "0"
+                }
+            };
+
+            // 즉시 성공 메시지 표시
+            alert('설문이 성공적으로 제출되었습니다. 감사합니다.');
+            
+            // 폼 초기화
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.value = "";
+            });
+            
+            document.getElementById('region-select').value = "";
+            document.getElementById('institution-select').value = "";
+            document.getElementById('institution-code').value = "";
+            document.getElementById('institution-select').disabled = true;
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbyAvzc2kzxi7PJpM-Q9alz1KEu_F-9RUg1CQ1MfpJFrPIkN3GaexTlEJHVrIXdivI3xWQ/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(formData),
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8',
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+        
+        // 모든 숫자 입력 필드에 대한 입력 검증
+        document.addEventListener('DOMContentLoaded', function() {
+            const numberInputs = document.querySelectorAll('input[type="number"]');
+            
+            // 모든 숫자 입력 필드 초기화 (공란으로)
+            numberInputs.forEach(function(input) {
+                input.value = "";
+                
+                // 키보드 입력 시 정수만 허용
+                input.addEventListener('keypress', function(e) {
+                    if (!/^\d*$/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+                
+                // 붙여넣기 시 정수만 허용
+                input.addEventListener('paste', function(e) {
+                    const clipboardData = e.clipboardData || window.clipboardData;
+                    const pastedData = clipboardData.getData('Text');
+                    
+                    if (!/^\d*$/.test(pastedData)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+            
+            // 종결자 현황 입력 필드 명시적으로 초기화
+            const terminationFields = [
+                'mar-end-male-death', 'mar-end-male-refusal', 'mar-end-male-other',
+                'mar-end-female-death', 'mar-end-female-refusal', 'mar-end-female-other'
+            ];
+            
+            terminationFields.forEach(function(fieldId) {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.value = "";
+                }
+            });
+            
+            // 기관 데이터 설정
+            const institutionData = {
+                "창원시": [
+                    { name: "동진노인통합지원센터", code: "A48120001" },
+                    { name: "창원도우누리노인통합재가센터", code: "A48120002" },
+                    { name: "명진노인통합지원센터", code: "A48120004" },
+                    { name: "마산희망지역자활센터", code: "A48120005" },
+                    { name: "경남노인통합지원센터", code: "A48120008" },
+                    { name: "정현사회적협동조합", code: "A48120011" },
+                    { name: "진해서부노인종합복지관", code: "A48120012" },
+                    { name: "진해노인종합복지관", code: "A48120013" },
+                    { name: "경남고용복지센터", code: "A48120014" },
+                    { name: "마산회원노인종합복지관", code: "A48120015" }
+                ],
+                "진주시": [
+                    { name: "진양노인통합지원센터", code: "A48170001" },
+                    { name: "진주노인통합지원센터", code: "A48170002" },
+                    { name: "나누리노인통합지원센터", code: "A48170003" },
+                    { name: "공덕의집노인통합지원센터", code: "A48170004" },
+                    { name: "하늘마음노인통합지원센터", code: "A48170005" }
+                ],
+                "통영시": [
+                    { name: "통영시종합사회복지관", code: "A48220002" },
+                    { name: "통영노인통합지원센터", code: "A48220003" }
+                ],
+                "사천시": [
+                    { name: "사랑원노인지원센터", code: "A48240001" },
+                    { name: "사천노인통합지원센터", code: "A48240002" }
+                ],
+                "김해시": [
+                    { name: "효능원노인통합지원센터", code: "A48250001" },
+                    { name: "김해시종합사회복지관", code: "A48250004" },
+                    { name: "생명의전화노인통합지원센터", code: "A48250005" },
+                    { name: "보현행원노인통합지원센터", code: "A48250006" },
+                    { name: "김해돌봄지원센터", code: "A48250007" }
+                ],
+                "밀양시": [
+                    { name: "밀양시자원봉사단체협의회", code: "A48270001" },
+                    { name: "밀양노인통합지원센터", code: "A48270002" },
+                    { name: "우리들노인통합지원센터", code: "A48270003" }
+                ],
+                "거제시": [
+                    { name: "거제노인통합지원센터", code: "A48310001" },
+                    { name: "거제사랑노인복지센터", code: "A48310002" }
+                ],
+                "양산시": [
+                    { name: "사회복지법인신생원양산재가노인복지센터", code: "A48330001" },
+                    { name: "양산행복한돌봄 사회적협동조합", code: "A48330004" },
+                    { name: "성요셉소규모노인종합센터", code: "A48330005" }
+                ],
+                "의령군": [
+                    { name: "의령노인통합지원센터", code: "A48720001" }
+                ],
+                "함안군": [
+                    { name: "(사)대한노인회함안군지회", code: "A48730001" },
+                    { name: "함안군재가노인통합지원센터", code: "A48730002" }
+                ],
+                "창녕군": [
+                    { name: "사회적협동조합 창녕지역자활센터", code: "A48740001" },
+                    { name: "창녕군새누리노인종합센터", code: "A48740002" }
+                ],
+                "고성군": [
+                    { name: "대한노인회 고성군지회(노인맞춤돌봄서비스)", code: "A48820003" },
+                    { name: "한올생명의집", code: "A48820004" }
+                ],
+                "남해군": [
+                    { name: "화방남해노인통합지원센터", code: "A48840001" },
+                    { name: "화방재가복지센터", code: "A48840002" }
+                ],
+                "하동군": [
+                    { name: "하동노인통합지원센터", code: "A48850001" },
+                    { name: "경남하동지역자활센터", code: "A48850002" }
+                ],
+                "산청군": [
+                    { name: "산청한일노인통합지원센터", code: "A48860001" },
+                    { name: "산청복음노인통합지원센터", code: "A48860002" },
+                    { name: "산청해민노인통합지원센터", code: "A48860003" },
+                    { name: "산청성모노인통합지원센터", code: "A48860004" }
+                ],
+                "함양군": [
+                    { name: "사단법인 대한노인회 함양군지회", code: "A48870002" }
+                ],
+                "거창군": [
+                    { name: "거창노인통합지원센터", code: "A48880002" },
+                    { name: "거창인애노인통합지원센터", code: "A48880003" },
+                    { name: "해월노인복지센터", code: "A48880004" }
+                ],
+                "합천군": [
+                    { name: "미타재가복지센터", code: "A48890003" },
+                    { name: "합천노인통합지원센터", code: "A48890004" },
+                    { name: "코끼리행복복지센터", code: "A48890005" },
+                    { name: "사회적협동조합 합천지역자활센터", code: "A48890006" }
+                ]
+            };
+            
+            // 시군 선택 시 기관명 드롭다운 업데이트
+            const regionSelect = document.getElementById('region-select');
+            const institutionSelect = document.getElementById('institution-select');
+            const institutionCodeInput = document.getElementById('institution-code');
+            
+            regionSelect.addEventListener('change', function() {
+                const selectedRegion = this.value;
+                
+                // 기존 옵션 제거
+                while (institutionSelect.options.length > 1) {
+                    institutionSelect.remove(1);
+                }
+                
+                // 기관코드 초기화
+                institutionCodeInput.value = '';
+                
+                if (selectedRegion) {
+                    // 기관 선택 활성화
+                    institutionSelect.disabled = false;
+                    
+                    // 선택된 시군에 해당하는 기관 옵션 추가
+                    const institutions = institutionData[selectedRegion];
+                    institutions.forEach(function(institution) {
+                        const option = document.createElement('option');
+                        option.value = institution.name;
+                        option.textContent = institution.name;
+                        option.dataset.code = institution.code;
+                        institutionSelect.appendChild(option);
+                    });
+                } else {
+                    // 기관 선택 비활성화
+                    institutionSelect.disabled = true;
+                }
+            });
+            
+            // 기관명 선택 시 기관코드 자동 입력
+            institutionSelect.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                institutionCodeInput.value = selectedOption.dataset.code || '';
+            });
+        });
+    // 폼 제출 시 구글 Apps Script Web App으로 데이터 전송
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('elderly-care-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // 입력값 수집 예시 (필요에 따라 추가/수정)
+            const region = document.getElementById('region-select').value;
+            const institution = document.getElementById('institution-select').value;
+            const institutionCode = document.getElementById('institution-code').value;
+            // 추가 입력값도 이곳에 수집
+
+            // 예시: 인력 현황 입력값 수집 (필요 시 추가)
+            // const staffMale = document.getElementById('staff-male').value;
+            // ...
+
+            // 데이터 객체 생성
+            const data = {
+                region,
+                institution,
+                institutionCode
+                // 추가 입력값도 포함
+            };
+
+            // Apps Script Web App URL (실제 URL)
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbyfRK0cv7mDp7omGG2PP0cWLa33zhU47QRcOT28ZPtVeyUzyEK_yaGvaMLkO0latfAM/exec';
+
+            fetch(scriptUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert('제출이 완료되었습니다!');
+                form.reset();
+            })
+            .catch(error => {
+                alert('제출 중 오류가 발생했습니다.');
+                console.error(error);
+            });
+        });
+    });
+    </script>
+</body>
+</html>

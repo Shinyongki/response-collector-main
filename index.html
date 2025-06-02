@@ -331,63 +331,56 @@
                 region: document.getElementById('region-select').value,
                 institution: document.getElementById('institution-select').value,
                 institutionCode: document.getElementById('institution-code').value,
-                personnel: {
-                    socialWorkerMale: document.querySelector('input[name="social-worker-male"]').value || "0",
-                    socialWorkerFemale: document.querySelector('input[name="social-worker-female"]').value || "0",
-                    caregiverMale: document.querySelector('input[name="caregiver-male"]').value || "0",
-                    caregiverFemale: document.querySelector('input[name="caregiver-female"]').value || "0"
-                },
-                newUsers: {
-                    male: document.querySelector('input[name="mar-new-male"]').value || "0",
-                    female: document.querySelector('input[name="mar-new-female"]').value || "0"
-                },
-                targetMale: {
-                    general: document.querySelector('input[name="target-male-general"]').value || "0",
-                    focused: document.querySelector('input[name="target-male-focused"]').value || "0",
-                    generalOverlap: document.querySelector('input[name="target-male-general-overlap"]').value || "0",
-                    focusedOverlap: document.querySelector('input[name="target-male-focused-overlap"]').value || "0",
-                    specializedOnly: document.querySelector('input[name="target-male-specialized-only"]').value || "0"
-                },
-                targetFemale: {
-                    general: document.querySelector('input[name="target-female-general"]').value || "0",
-                    focused: document.querySelector('input[name="target-female-focused"]').value || "0",
-                    generalOverlap: document.querySelector('input[name="target-female-general-overlap"]').value || "0",
-                    focusedOverlap: document.querySelector('input[name="target-female-focused-overlap"]').value || "0",
-                    specializedOnly: document.querySelector('input[name="target-female-specialized-only"]').value || "0"
-                },
-                endMale: {
-                    death: document.querySelector('input[name="mar-end-male-death"]').value || "0",
-                    refusal: document.querySelector('input[name="mar-end-male-refusal"]').value || "0",
-                    other: document.querySelector('input[name="mar-end-male-other"]').value || "0"
-                },
-                endFemale: {
-                    death: document.querySelector('input[name="mar-end-female-death"]').value || "0",
-                    refusal: document.querySelector('input[name="mar-end-female-refusal"]').value || "0",
-                    other: document.querySelector('input[name="mar-end-female-other"]').value || "0"
-                }
+                socialWorkerMale: document.querySelector('input[name="social-worker-male"]')?.value || "0",
+                socialWorkerFemale: document.querySelector('input[name="social-worker-female"]')?.value || "0",
+                caregiverMale: document.querySelector('input[name="caregiver-male"]')?.value || "0",
+                caregiverFemale: document.querySelector('input[name="caregiver-female"]')?.value || "0",
+                
+                newUsersMale: "0",
+                newUsersFemale: "0",
+                
+                targetMaleGeneral: document.querySelector('input[name="target-male-general"]')?.value || "0",
+                targetMaleFocused: document.querySelector('input[name="target-male-focused"]')?.value || "0",
+                targetMaleGeneralOverlap: document.querySelector('input[name="target-male-general-overlap"]')?.value || "0",
+                targetMaleFocusedOverlap: document.querySelector('input[name="target-male-focused-overlap"]')?.value || "0",
+                targetMaleSpecializedOnly: document.querySelector('input[name="target-male-specialized-only"]')?.value || "0",
+                
+                targetFemaleGeneral: document.querySelector('input[name="target-female-general"]')?.value || "0",
+                targetFemaleFocused: document.querySelector('input[name="target-female-focused"]')?.value || "0",
+                targetFemaleGeneralOverlap: document.querySelector('input[name="target-female-general-overlap"]')?.value || "0",
+                targetFemaleFocusedOverlap: document.querySelector('input[name="target-female-focused-overlap"]')?.value || "0",
+                targetFemaleSpecializedOnly: document.querySelector('input[name="target-female-specialized-only"]')?.value || "0",
+                
+                endMaleDeath: "0",
+                endMaleRefusal: "0",
+                endMaleOther: "0",
+                endFemaleDeath: "0",
+                endFemaleRefusal: "0",
+                endFemaleOther: "0"
             };
 
             // 즉시 성공 메시지 표시
             alert('설문이 성공적으로 제출되었습니다. 감사합니다.');
-            
-            // 폼 초기화
-            document.querySelectorAll('input[type="number"]').forEach(input => {
-                input.value = "";
-            });
-            
-            document.getElementById('region-select').value = "";
-            document.getElementById('institution-select').value = "";
-            document.getElementById('institution-code').value = "";
-            document.getElementById('institution-select').disabled = true;
 
+            // 폼 초기화
+            this.reset();
+
+            // Google Apps Script로 데이터 전송
             try {
-                const response = await fetch('https://script.google.com/macros/s/AKfycbyAvzc2kzxi7PJpM-Q9alz1KEu_F-9RUg1CQ1MfpJFrPIkN3GaexTlEJHVrIXdivI3xWQ/exec', {
+                // Apps Script Web App URL
+                const scriptUrl = 'https://script.google.com/macros/s/AKfycbyZyul_oNPwsCNGN3ob77VhnEFwSflOZADORGSa7FuuSfUDvnpXkK8BNS8e0b3t1sYF/exec';
+                
+                // URL 인코딩된 폼 데이터 생성
+                const urlFormData = new URLSearchParams();
+                for (const key in formData) {
+                    urlFormData.append(key, formData[key]);
+                }
+                
+                const response = await fetch(scriptUrl, {
                     method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify(formData),
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8',
-                    }
+                    mode: 'no-cors', // CORS 문제 해결을 위해 no-cors 모드 사용
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: urlFormData
                 });
                 
             } catch (error) {
